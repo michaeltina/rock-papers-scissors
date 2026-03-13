@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice (min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -16,10 +19,12 @@ else {
     console.log('scissors')
 }
 
-let humanChoice = prompt('Choose between rock, paper and scissors! ')
-
 function getHumanChoice () {
-    return choice;
+    let hChoice = prompt('Choose between rock, paper and scissors! ');
+
+    console.log(hChoice);
 }
 
-console.log(humanChoice)
+function playRound (humanChoice, computerChoice) {
+
+}
