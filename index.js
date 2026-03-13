@@ -15,3 +15,11 @@ else if (choice === 2) {
 else {
     console.log('scissors')
 }
+
+let humanChoice = prompt('Choose between rock, paper and scissors! ')
+
+function getHumanChoice () {
+    return choice;
+}
+
+console.log(humanChoice)
