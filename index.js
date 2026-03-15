@@ -1,7 +1,4 @@
-let humanScore = 0;
-let computerScore = 0;
-
-function getComputerChoice (min, max) {
+function getComputerChoice (min=1, max=3) {
     let choice = Math.floor(Math.random() * (max - min + 1) + min); 
 
     if (choice === 1) {
@@ -15,36 +12,46 @@ function getComputerChoice (min, max) {
     else {
         return 'scissors'
     }
-    
 }
-
-getComputerChoice(1, 3)
-
 
 
 function getHumanChoice () {
-    return prompt('Choose between rock, paper and scissors! ');
+    let choice = prompt('Choose between rock, paper and scissors! ');
+    return choice.toLowerCase();
 }
 
-
+let humanScore = 0;
+let computerScore = 0; 
 
 function playRound (humanChoice, computerChoice) {
     if (humanChoice === computerChoice){
-        console.log("It's a tie! Try again")
+        return "It's a tie! Try again"
     } else if (
         (humanChoice === 'rock' && computerChoice === 'scissors') || (humanChoice === 'scissors' && computerChoice === 'paper') || (humanChoice === 'paper' && computerChoice === 'rock')
     ) {
-        console.log('You Win')
+        humanScore += 1;
+        return 'You Win'
     } else {
-        console.log('Computer Wins')
+        computerScore += 1;
+        return 'Computer Wins'
     } 
 }
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
+for (let round = 1; round <= 5; round++){
+    console.log(`You are now playing round ${round}`)
+
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice(1, 3); 
+
+    console.log("The computer chose:", computerChoice)
+    console.log("You chose:", humanChoice)
 
 
-playRound(humanChoice, computerChoice);
 
-console.log("Human chose:", humanChoice, "Type:", typeof humanChoice);
-console.log("Computer chose:", computerChoice, "Type:", typeof computerChoice);
+    playRound(humanChoice, computerChoice); 
+
+    console.log("Human Score:", humanScore);
+    console.log("Computer Score:", computerScore);
+}
+
+console.log('Game Over');
