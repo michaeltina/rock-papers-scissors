@@ -16,8 +16,7 @@ function getComputerChoice (min=1, max=3) {
 
 
 function getHumanChoice () {
-    let choice = prompt('Choose between rock, paper and scissors! ');
-    return choice.toLowerCase();
+    return prompt('Choose between rock, paper and scissors! ').toLowerCase();
 }
 
 let humanScore = 0;
@@ -37,7 +36,7 @@ function playRound (humanChoice, computerChoice) {
     } 
 }
 
-for (let round = 1; round <= 5; round++){
+/* for (let round = 1; round ; round++){
     console.log(`You are now playing round ${round}`)
 
     const humanChoice = getHumanChoice();
@@ -51,7 +50,41 @@ for (let round = 1; round <= 5; round++){
     playRound(humanChoice, computerChoice); 
 
     console.log("Human Score:", humanScore);
-    console.log("Computer Score:", computerScore);
-}
-
+    console.log("Computer Score:", computerScore); 
+} */
 console.log('Game Over');
+
+const rock = document.createElement('button');
+const paper = document.createElement('button');
+const scissors = document.createElement('button')
+
+rock.textContent = 'rock';
+rock.style.padding = '10px 20px'
+rock.style.marginRight = '15px'
+
+paper.textContent = 'paper';
+paper.style.padding = '10px 20px'
+paper.style.marginRight = '15px'
+
+scissors.textContent = 'scissors';
+scissors.style.padding = '10px 20px'
+scissors.style.marginRight = '15px'
+
+
+rock.addEventListener('click', () => {
+    playRound('rock');
+})
+
+paper.addEventListener('click', () => {
+    playRound('paper');
+})
+
+scissors.addEventListener('click', () => {
+    playRound('scissors');
+})
+
+const results = document.createElement('div')
+
+results.textContent = 'You win';
+
+document.body.append(rock, paper, scissors, results)
