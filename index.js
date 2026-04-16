@@ -1,62 +1,9 @@
-function getComputerChoice (min=1, max=3) {
-    let choice = Math.floor(Math.random() * (max - min + 1) + min); 
-
-    if (choice === 1) {
-        return "rock"
-    }
-
-    else if (choice === 2) {
-        return 'paper'
-    }
-
-    else {
-        return 'scissors'
-    }
-}
-
-
-function getHumanChoice () {
-    return prompt('Choose between rock, paper and scissors! ').toLowerCase();
-}
-
-let humanScore = 0;
-let computerScore = 0; 
-
-function playRound (humanChoice, computerChoice) {
-    if (humanChoice === computerChoice){
-        return "It's a tie! Try again"
-    } else if (
-        (humanChoice === 'rock' && computerChoice === 'scissors') || (humanChoice === 'scissors' && computerChoice === 'paper') || (humanChoice === 'paper' && computerChoice === 'rock')
-    ) {
-        humanScore += 1;
-        return 'You Win'
-    } else {
-        computerScore += 1;
-        return 'Computer Wins'
-    } 
-}
-
-/* for (let round = 1; round ; round++){
-    console.log(`You are now playing round ${round}`)
-
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice(1, 3); 
-
-    console.log("The computer chose:", computerChoice)
-    console.log("You chose:", humanChoice)
-
-
-
-    playRound(humanChoice, computerChoice); 
-
-    console.log("Human Score:", humanScore);
-    console.log("Computer Score:", computerScore); 
-} */
-console.log('Game Over');
-
 const rock = document.createElement('button');
 const paper = document.createElement('button');
 const scissors = document.createElement('button')
+const resultsDiv = document.createElement('div')
+const humanScoreDiv = document.createElement('div');
+const compScoreDiv = document.createElement('div');
 
 rock.textContent = 'rock';
 rock.style.padding = '10px 20px'
@@ -83,8 +30,58 @@ scissors.addEventListener('click', () => {
     playRound('scissors');
 })
 
-const results = document.createElement('div')
+document.body.append(rock, paper, scissors, resultsDiv, humanScoreDiv, compScoreDiv)
 
-results.textContent = 'You win';
+function getComputerChoice (min=1, max=3) {
+    let choice = Math.floor(Math.random() * (max - min + 1) + min); 
 
-document.body.append(rock, paper, scissors, results)
+    if (choice === 1) {
+        return "rock"
+    }
+
+    else if (choice === 2) {
+        return 'paper'
+    }
+
+    else {
+        return 'scissors'
+    }
+}
+
+let humanScore = 0;
+let computerScore = 0; 
+
+function disableButtons(){
+    rock.disabled = true;
+    paper.disabled = true;
+    scissors.disabled = true;
+}
+
+function playRound (humanChoice) {
+    const computerChoice = getComputerChoice(1, 3)
+
+    if (humanChoice === computerChoice){
+        resultsDiv.textContent = "It's a tie! Try again"
+    } else if (
+        (humanChoice === 'rock' && computerChoice === 'scissors') || (humanChoice === 'scissors' && computerChoice === 'paper') || (humanChoice === 'paper' && computerChoice === 'rock')
+    ) {
+        humanScore += 1;
+        resultsDiv.textContent = 'You Win'
+    } else {
+        computerScore += 1;
+        resultsDiv.textContent = 'Computer Wins'
+    } 
+
+    humanScoreDiv.textContent = `Human Score: ${humanScore}`
+    compScoreDiv.textContent = `Computer Score: ${computerScore}`
+
+    console.log("SCore updated - HUman:", humanScore, "Computer", computerScore)
+
+    if (humanScore >= 5) {
+        resultsDiv.textContent = "You won the game!";
+        disableButtons();
+    } else if (computerScore >= 5) {
+        resultsDiv.textContent = "Computer has won the game";
+        disableButtons();
+    }
+}
